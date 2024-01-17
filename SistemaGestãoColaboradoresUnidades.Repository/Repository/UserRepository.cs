@@ -1,4 +1,4 @@
-﻿using SistemaGestãoColaboradoresUnidades.Domain;
+﻿using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 using SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces;
 
 namespace SistemaGestãoColaboradoresUnidades.Repository.Repository

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 
 namespace SistemaGestãoColaboradoresUnidades.Domain.Dto
 {

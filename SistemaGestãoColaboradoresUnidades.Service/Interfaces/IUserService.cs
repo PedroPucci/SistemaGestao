@@ -1,5 +1,5 @@
-﻿using SistemaGestãoColaboradoresUnidades.Domain;
-using SistemaGestãoColaboradoresUnidades.Domain.Dto;
+﻿using SistemaGestãoColaboradoresUnidades.Domain.Dto;
+using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 
 namespace SistemaGestãoColaboradoresUnidades.Service.Interfaces
 {

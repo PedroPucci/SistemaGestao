@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using SistemaGestãoColaboradoresUnidades.Domain;
+using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 
 namespace SistemaGestãoColaboradoresUnidades.Repository
 {
@@ -15,7 +15,7 @@ namespace SistemaGestãoColaboradoresUnidades.Repository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Configuration.GetConnectionString("WebApiDatabase"));
+            optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
         }
 
         public DbSet<UserEntity> UserEntity { get; set; }

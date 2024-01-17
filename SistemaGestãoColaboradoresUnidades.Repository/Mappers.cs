@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using SistemaGestãoColaboradoresUnidades.Domain;
 using SistemaGestãoColaboradoresUnidades.Domain.Dto;
+using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 
 namespace SistemaGestãoColaboradoresUnidades.Repository
 {

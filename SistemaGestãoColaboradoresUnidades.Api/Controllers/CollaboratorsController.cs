@@ -1,6 +1,6 @@
 ﻿namespace SistemaGestãoColaboradoresUnidades.Api.Controllers
 {
-    public class UnityController
+    public class CollaboratorsController
     {
     }
 }

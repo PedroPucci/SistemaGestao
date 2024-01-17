@@ -7,9 +7,7 @@ using SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces;
 using SistemaGestãoColaboradoresUnidades.Service;
 using SistemaGestãoColaboradoresUnidades.Service.Interfaces;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("WebApiDatabase"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"));
 });
 
 builder.Services.AddScoped<IRepositoryUoW, RepositoryUoW>();
@@ -34,7 +32,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "[RTE] - Avaliação técnica / Pedro Ighor Holanda Pucci",
+        Title = "Sistema de Gestão de Colaboradores e Unidades",
         Description = "[RTE] - Avaliação técnica / Pedro Ighor Holanda Pucci",
     });
 });
