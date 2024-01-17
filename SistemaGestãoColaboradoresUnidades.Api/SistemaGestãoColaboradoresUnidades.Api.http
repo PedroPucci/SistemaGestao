@@ -1,0 +1,6 @@
+@SistemaGestãoColaboradoresUnidades.Api_HostAddress = http://localhost:5036
+
+GET {{SistemaGestãoColaboradoresUnidades.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
