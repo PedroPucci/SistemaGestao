@@ -1,4 +1,5 @@
-﻿using SistemaGestãoColaboradoresUnidades.Domain.Dto;
+﻿using SistemaGestãoColaboradoresUnidades.Domain.Constant;
+using SistemaGestãoColaboradoresUnidades.Domain.Dto;
 using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 
 namespace SistemaGestãoColaboradoresUnidades.Service.Interfaces
@@ -7,5 +8,7 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Interfaces
     {
         Task<UserEntity> AddUserEntity(UserEntityDto userEntityDto);
         Task<UserEntity> UpdateUserEntity(UserEntityDto userEntityDto);
+        Task<List<UserEntity>> GetAllUserEntities();
+        Task<List<UserEntity>> GetAllUserEntityByStatus(StatusUser statusUser);
     }
 }

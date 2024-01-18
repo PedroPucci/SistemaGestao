@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SistemaGestãoColaboradoresUnidades.Domain.Constant;
 using SistemaGestãoColaboradoresUnidades.Domain.Dto;
 using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 using SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces;
@@ -19,14 +20,76 @@ namespace SistemaGestãoColaboradoresUnidades.Service
             _mapper = mapper;
         }
 
-        public Task<UserEntity> AddUserEntity(UserEntityDto userEntityDto)
+        public async Task<UserEntity> AddUserEntity(UserEntityDto userEntityDto)
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                UserEntity userEntity = _mapper.Map<UserEntityDto, UserEntity>(userEntityDto);
+                var result = await _repositoryUoW.UserRepository.AddUserEntityAsync(userEntity);
+
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
         }
 
-        public Task<UserEntity> UpdateUserEntity(UserEntityDto userEntityDto)
+        public async Task<UserEntity> UpdateUserEntity(UserEntityDto userEntityDto)
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                UserEntity userEntity = _mapper.Map<UserEntityDto, UserEntity>(userEntityDto);
+                userEntity.Password = userEntityDto.Password;
+                userEntity.StatusUser = userEntityDto.StatusUser;
+
+                var result = _repositoryUoW.UserRepository.UpdateUserEntity(userEntity);
+
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+        }
+        public async Task<List<UserEntity>> GetAllUserEntities()
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<UserEntity> userEntities = await _repositoryUoW.UserRepository.GetAllUserEntitiesAsync();
+                _repositoryUoW.Commit();
+                return userEntities;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+        }
+
+        public async Task<List<UserEntity>> GetAllUserEntityByStatus(StatusUser statusUser)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<UserEntity> userEntities = await _repositoryUoW.UserRepository.GetAllUserEntityByStatusAsync(statusUser);
+                _repositoryUoW.Commit();
+                return userEntities;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
         }
     }
 }
