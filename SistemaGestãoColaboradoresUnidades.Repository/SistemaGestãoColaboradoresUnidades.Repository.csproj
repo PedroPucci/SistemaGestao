@@ -30,4 +30,8 @@
     <ProjectReference Include="..\SistemaGestãoColaboradoresUnidades.Domain\SistemaGestãoColaboradoresUnidades.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
