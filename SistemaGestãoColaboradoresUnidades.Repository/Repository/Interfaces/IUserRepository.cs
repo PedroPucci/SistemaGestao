@@ -9,5 +9,6 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces
         UserEntity UpdateUserEntity(UserEntity userEntity);
         Task<List<UserEntity>> GetAllUserEntitiesAsync();
         Task<List<UserEntity>> GetAllUserEntityByStatusAsync(StatusUser statusUser);
+        Task<UserEntity> GetUserEntityByLoginAsync(UserEntity userEntity);
     }
 }

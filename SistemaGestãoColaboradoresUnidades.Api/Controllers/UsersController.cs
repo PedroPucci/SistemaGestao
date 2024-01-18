@@ -48,7 +48,7 @@ namespace SistemaGestãoColaboradoresUnidades.Api.Controllers
         {
             try
             {
-                UserEntity userEntity = await _serviceUoW.UserService.UpdateUserEntity(userEntityDto);
+                UserEntity? userEntity = await _serviceUoW.UserService.UpdateUserEntity(userEntityDto);
                 return Ok(new
                 {
                     mensagem = $"User registration updated successfully."

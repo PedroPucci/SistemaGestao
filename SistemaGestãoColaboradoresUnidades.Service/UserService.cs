@@ -45,10 +45,15 @@ namespace SistemaGestãoColaboradoresUnidades.Service
             try
             {
                 UserEntity userEntity = _mapper.Map<UserEntityDto, UserEntity>(userEntityDto);
-                userEntity.Password = userEntityDto.Password;
-                userEntity.StatusUser = userEntityDto.StatusUser;
+                UserEntity? userEntityByLogin = await _repositoryUoW.UserRepository.GetUserEntityByLoginAsync(userEntity);
 
-                var result = _repositoryUoW.UserRepository.UpdateUserEntity(userEntity);
+                if (userEntityByLogin == null)
+                    return null;
+
+                userEntityByLogin.Password = userEntityDto.Password;
+                userEntityByLogin.StatusUser = userEntityDto.StatusUser;
+
+                var result = _repositoryUoW.UserRepository.UpdateUserEntity(userEntityByLogin);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
@@ -60,6 +65,7 @@ namespace SistemaGestãoColaboradoresUnidades.Service
                 throw new InvalidOperationException("Unexpected error " + ex + "!");
             }
         }
+
         public async Task<List<UserEntity>> GetAllUserEntities()
         {
             using var transaction = _repositoryUoW.BeginTransaction();

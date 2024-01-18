@@ -36,9 +36,9 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             return await _context.UserEntity.Where(user => user.StatusUser == statusUser).ToListAsync();
         }
 
-        //public async Task<List<UserEntity>> GetUserEntityAsync(UserEntity userEntity)
-        //{
-        //    return await _context.UserEntity.Where(user => user.StatusUser == statusUser).ToListAsync();
-        //}
+        public async Task<UserEntity> GetUserEntityByLoginAsync(UserEntity userEntity)
+        {
+            return await _context.UserEntity.Where(user => user.Login == userEntity.Login).FirstAsync();
+        }
     }
 }
