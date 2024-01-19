@@ -62,5 +62,24 @@ namespace SistemaGestãoColaboradoresUnidades.Api.Controllers
                 });
             }
         }
+
+        [HttpGet("all")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(List<UnityDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetAllUnities()
+        {
+            try
+            {
+                var unityEntities = await _serviceUoW.UnityService.GetAllUnities();
+                return Ok(unityEntities);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "There was an error loading unities! " + ex + ""
+                });
+            }
+        }
     }
 }
