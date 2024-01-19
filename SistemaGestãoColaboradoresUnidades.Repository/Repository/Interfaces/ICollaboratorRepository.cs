@@ -4,7 +4,7 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces
 {
     public interface ICollaboratorRepository
     {
-        Task<List<CollaboratorEntity>> GetAllCollaboratorEntites();
-        CollaboratorEntity UpdateCollaboratorEntity(CollaboratorEntity collaboratorEntity);
+        Task<List<CollaboratorEntity>> GetAllCollaborators();
+        CollaboratorEntity UpdateCollaborator(CollaboratorEntity collaboratorEntity);
     }
 }

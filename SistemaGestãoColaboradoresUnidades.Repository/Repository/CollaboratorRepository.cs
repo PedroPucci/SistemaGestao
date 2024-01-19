@@ -12,12 +12,12 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             _context = context;
         }
 
-        public Task<List<CollaboratorEntity>> GetAllCollaboratorEntites()
+        public Task<List<CollaboratorEntity>> GetAllCollaborators()
         {
             throw new NotImplementedException();
         }
 
-        public CollaboratorEntity UpdateCollaboratorEntity(CollaboratorEntity collaboratorEntity)
+        public CollaboratorEntity UpdateCollaborator(CollaboratorEntity collaboratorEntity)
         {
             throw new NotImplementedException();
         }
