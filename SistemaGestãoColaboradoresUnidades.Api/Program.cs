@@ -4,8 +4,9 @@ using Microsoft.OpenApi.Models;
 using SistemaGestãoColaboradoresUnidades.Repository;
 using SistemaGestãoColaboradoresUnidades.Repository.Repository;
 using SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces;
-using SistemaGestãoColaboradoresUnidades.Service;
-using SistemaGestãoColaboradoresUnidades.Service.Interfaces;
+using SistemaGestãoColaboradoresUnidades.Service.Service;
+using SistemaGestãoColaboradoresUnidades.Service.Service.Interfaces;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -16,6 +17,11 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<DataBaseContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("WebApiDatabase"));
+});
+
+builder.Services.AddMvc().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
 });
 
 builder.Services.AddScoped<IRepositoryUoW, RepositoryUoW>();
