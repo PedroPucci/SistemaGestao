@@ -28,5 +28,15 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
         {
             throw new NotImplementedException();
         }
+
+        public async Task<CollaboratorEntity> AddCollaborator(CollaboratorDto collaboratorDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<CollaboratorEntity> DeleteCollaborator(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
