@@ -3,22 +3,18 @@ using SistemaGestãoColaboradoresUnidades.Domain.Dto;
 
 namespace SistemaGestãoColaboradoresUnidades.Domain.Validator
 {
-
-    public class UserDtoValidator : AbstractValidator<UserDto>
+    public class UnityDtoValidator : AbstractValidator<UnityDto>
     {
-        public UserDtoValidator()
+        public UnityDtoValidator()
         {
             RuleFor(x => x)
                 .NotEmpty();
 
-            RuleFor(x => x.Login)
+            RuleFor(x => x.Name)
                 .NotEmpty();
 
-            RuleFor(x => x.Password)
+            RuleFor(x => x.Code)
                 .NotEmpty();
-
-            RuleFor(x => x.Status)
-                .IsInEnum();
         }
     }
 }

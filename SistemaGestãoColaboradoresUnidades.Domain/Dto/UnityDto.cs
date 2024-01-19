@@ -9,8 +9,5 @@ namespace SistemaGestãoColaboradoresUnidades.Domain.Dto
 
         [Required]
         public string? Name { get; set; }
-
-        [Required]
-        public bool Inactivated { get; set; } = false;
     }
 }

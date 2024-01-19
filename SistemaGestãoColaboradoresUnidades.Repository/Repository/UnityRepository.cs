@@ -1,4 +1,5 @@
-﻿using SistemaGestãoColaboradoresUnidades.Domain.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 using SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces;
 
 namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
@@ -18,15 +19,28 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             return result.Entity;
         }
 
+        public UnityEntity UpdateUnity(UnityEntity unityEntity)
+        {
+            var response = _context.UnityEntity.Update(unityEntity);
+            return response.Entity;
+        }
+
         public async Task<List<UnityEntity>> GetAllUnities()
         {
             throw new NotImplementedException();
         }
 
-        public UnityEntity UpdateUnity(UnityEntity unityEntity)
+        public async Task<UnityEntity> GetUnityByCodeAsync(UnityEntity unityEntity)
         {
-            var response = _context.UnityEntity.Update(unityEntity);
-            return response.Entity;
+            return await _context.UnityEntity.Where(unity => unity.Code == unityEntity.Code).FirstAsync();
+        }
+
+        public async Task<int?> GetCodeAsync(int? code)
+        {
+            return await _context.UnityEntity
+                .Where(unity => unity.Code == code)
+                .Select(unity => (int?)unity.Code)
+                .FirstOrDefaultAsync();
         }
     }
 }

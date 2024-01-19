@@ -39,5 +39,28 @@ namespace SistemaGestãoColaboradoresUnidades.Api.Controllers
                 });
             }
         }
+
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesDefaultResponseType]
+        public async Task<IActionResult> UpdateUnity([FromBody] UnityDto unityDto)
+        {
+            try
+            {
+                UnityEntity? unityEntity = await _serviceUoW.UnityService.UpdateUnity(unityDto);
+                return Ok(new
+                {
+                    mensagem = $"Unity registration updated successfully."
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new
+                {
+                    mensagem = "An error occurred while updating the unity! " + ex + ""
+                });
+            }
+        }
     }
 }

@@ -55,16 +55,16 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                UserEntity userEntity = _mapper.Map<UserDto, UserEntity>(userDto);
-                UserEntity? userEntityByLogin = await _repositoryUoW.UserRepository.GetUserByLoginAsync(userEntity);
+                var userEntity = _mapper.Map<UserDto, UserEntity>(userDto);
+                var userByLogin = await _repositoryUoW.UserRepository.GetUserByLoginAsync(userEntity);
 
-                if (userEntityByLogin == null)
+                if (userByLogin == null)
                     return null;
 
-                userEntityByLogin.Password = userDto.Password;
-                userEntityByLogin.Status = userDto.Status;
+                userByLogin.Password = userDto.Password;
+                userByLogin.Status = userDto.Status;
 
-                var result = _repositoryUoW.UserRepository.UpdateUser(userEntityByLogin);
+                var result = _repositoryUoW.UserRepository.UpdateUser(userByLogin);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
