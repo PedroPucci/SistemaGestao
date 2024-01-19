@@ -7,5 +7,6 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Interfaces
     {
         Task<UnityEntity> UpdateUnityEntity(UnityEntityDto unityEntityDto);
         Task<List<UnityEntity>> GetAllUnityEntites();
+        Task<UnityEntity> AddUnityEntity(UnityEntityDto unityEntityDto);
     }
 }

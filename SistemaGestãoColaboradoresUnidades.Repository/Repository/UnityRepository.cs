@@ -12,14 +12,21 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             _context = context;
         }
 
-        public Task<List<UnityEntity>> GetAllUnityEntites()
+        public async Task<UnityEntity> AddUnityEntityAsync(UnityEntity unityEntity)
+        {
+            var result = await _context.UnityEntity.AddAsync(unityEntity);
+            return result.Entity;
+        }
+
+        public async Task<List<UnityEntity>> GetAllUnityEntites()
         {
             throw new NotImplementedException();
         }
 
         public UnityEntity UpdateUnityEntity(UnityEntity unityEntity)
         {
-            throw new NotImplementedException();
+            var response = _context.UnityEntity.Update(unityEntity);
+            return response.Entity;
         }
     }
 }

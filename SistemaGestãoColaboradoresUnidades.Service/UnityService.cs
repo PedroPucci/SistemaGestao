@@ -19,6 +19,25 @@ namespace SistemaGestãoColaboradoresUnidades.Service
             _mapper = mapper;
         }
 
+        public async Task<UnityEntity> AddUnityEntity(UnityEntityDto unityEntityDto)
+        {
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                UnityEntity unityEntity = _mapper.Map<UnityEntityDto, UnityEntity>(unityEntityDto);
+                var result = await _repositoryUoW.UnityRepository.AddUnityEntityAsync(unityEntity);
+
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+        }
+
         public Task<List<UnityEntity>> GetAllUnityEntites()
         {
             throw new NotImplementedException();
