@@ -12,14 +12,14 @@ namespace SistemaGestãoColaboradoresUnidades.Repository
         {
             return new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<UserEntity, UserEntityDto>();
-                cfg.CreateMap<UserEntityDto, UserEntity>();
+                cfg.CreateMap<UserEntity, UserDto>();
+                cfg.CreateMap<UserDto, UserEntity>();
 
-                cfg.CreateMap<UnityEntity, UnityEntityDto>();
-                cfg.CreateMap<UnityEntityDto, UnityEntity>();
+                cfg.CreateMap<UnityEntity, UnityDto>();
+                cfg.CreateMap<UnityDto, UnityEntity>();
 
-                cfg.CreateMap<CollaboratorEntity, CollaboratorEntityDto>();
-                cfg.CreateMap<CollaboratorEntityDto, CollaboratorEntity>();
+                cfg.CreateMap<CollaboratorEntity, CollaboratorDto>();
+                cfg.CreateMap<CollaboratorDto, CollaboratorEntity>();
             });
         }
     }

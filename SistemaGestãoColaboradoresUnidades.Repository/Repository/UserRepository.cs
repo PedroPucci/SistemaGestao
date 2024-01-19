@@ -14,29 +14,29 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             _context = context;
         }
 
-        public async Task<UserEntity> AddUserEntityAsync(UserEntity userEntity)
+        public async Task<UserEntity> AddUserAsync(UserEntity userEntity)
         {
             var result = await _context.UserEntity.AddAsync(userEntity);
             return result.Entity;
         }
 
-        public UserEntity UpdateUserEntity(UserEntity userEntity)
+        public UserEntity UpdateUser(UserEntity userEntity)
         {
             var response = _context.UserEntity.Update(userEntity);
             return response.Entity;
         }
 
-        public async Task<List<UserEntity>> GetAllUserEntitiesAsync()
+        public async Task<List<UserEntity>> GetAllUsersAsync()
         {
             return await _context.UserEntity.ToListAsync();
         }
 
-        public async Task<List<UserEntity>> GetAllUserEntityByStatusAsync(StatusUser statusUser)
+        public async Task<List<UserEntity>> GetAllUsersByStatusAsync(UserStatus userStatus)
         {
-            return await _context.UserEntity.Where(user => user.StatusUser == statusUser).ToListAsync();
+            return await _context.UserEntity.Where(user => user.Status == userStatus).ToListAsync();
         }
 
-        public async Task<UserEntity> GetUserEntityByLoginAsync(UserEntity userEntity)
+        public async Task<UserEntity> GetUserByLoginAsync(UserEntity userEntity)
         {
             return await _context.UserEntity.Where(user => user.Login == userEntity.Login).FirstAsync();
         }

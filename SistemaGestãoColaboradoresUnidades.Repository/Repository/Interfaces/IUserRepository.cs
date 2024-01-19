@@ -5,10 +5,10 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces
 {
     public interface IUserRepository
     {
-        Task<UserEntity> AddUserEntityAsync(UserEntity userEntity);
-        UserEntity UpdateUserEntity(UserEntity userEntity);
-        Task<List<UserEntity>> GetAllUserEntitiesAsync();
-        Task<List<UserEntity>> GetAllUserEntityByStatusAsync(StatusUser statusUser);
-        Task<UserEntity> GetUserEntityByLoginAsync(UserEntity userEntity);
+        Task<UserEntity> AddUserAsync(UserEntity userEntity);
+        UserEntity UpdateUser(UserEntity userEntity);
+        Task<List<UserEntity>> GetAllUsersAsync();
+        Task<List<UserEntity>> GetAllUsersByStatusAsync(UserStatus userStatus);
+        Task<UserEntity> GetUserByLoginAsync(UserEntity userEntity);
     }
 }

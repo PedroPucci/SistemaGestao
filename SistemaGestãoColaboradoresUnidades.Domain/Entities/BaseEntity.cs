@@ -5,7 +5,7 @@ namespace SistemaGestãoColaboradoresUnidades.Domain.Entity
     public abstract class BaseEntity
     {
         [Key]
-        public int Id { get; set; }        
+        public int Id { get; private set; }        
 
         protected BaseEntity(){}
     }
