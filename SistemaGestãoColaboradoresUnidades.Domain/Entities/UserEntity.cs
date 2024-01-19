@@ -7,6 +7,6 @@ namespace SistemaGestãoColaboradoresUnidades.Domain.Entity
         public string? Login { get; set; }
         public string? Password { get; set; }
         public UserStatus Status { get; set; }
-        public ICollection<ICollection<CollaboratorEntity>> CollectionCollaboratorEntity { get; } = new List<ICollection<CollaboratorEntity>>();
+        public ICollection<CollaboratorEntity>? CollectionCollaboratorEntity { get; }
     }
 }
