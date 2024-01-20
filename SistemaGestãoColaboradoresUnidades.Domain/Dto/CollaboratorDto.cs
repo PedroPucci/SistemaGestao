@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 
 namespace SistemaGestãoColaboradoresUnidades.Domain.Dto
 {
     public class CollaboratorDto
     {
+        [Key]
+        public int Id { get; set; }
+
         [Required]
         public string? Name { get; set; }
 

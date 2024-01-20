@@ -30,9 +30,9 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             throw new NotImplementedException();
         }
 
-        public async Task<UnityEntity> GetUnityByCodeAsync(UnityEntity unityEntity)
+        public async Task<UnityEntity> GetUnityByCodeAsync(int code)
         {
-            return await _context.UnityEntity.Where(unity => unity.Code == unityEntity.Code).FirstAsync();
+            return await _context.UnityEntity.FindAsync(code);
         }
 
         public async Task<UnityEntity> GetByIdAsync(int unityId)

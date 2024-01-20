@@ -88,15 +88,17 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                var unityEntity = _mapper.Map<UnityDto, UnityEntity>(unityDto);
-                var unityEntityByCode = await _repositoryUoW.UnityRepository.GetUnityByCodeAsync(unityEntity);
+                int codeUnity = (int)unityDto.Code;
 
-                if (unityEntityByCode == null)
-                    throw new InvalidOperationException("This code invalid!");
+                UnityEntity unityCode = await _repositoryUoW.UnityRepository.GetUnityByCodeAsync(codeUnity);
 
-                unityEntityByCode.Inactivated = true;
+                if (unityCode == null)
+                    throw new InvalidOperationException("Unity does not found!");
 
-                var result = _repositoryUoW.UnityRepository.UpdateUnity(unityEntityByCode);
+                unityCode.Inactivated = unityDto.Inactivated;
+                unityCode.Name = unityDto.Name;
+
+                var result = _repositoryUoW.UnityRepository.UpdateUnity(unityCode);
 
                 await _repositoryUoW.SaveAsync();
                 await transaction.CommitAsync();
