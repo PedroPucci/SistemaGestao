@@ -28,7 +28,7 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
 
         public async Task<List<UserEntity>> GetAllUsersAsync()
         {
-            return await _context.UserEntity.Select(user => new UserEntity
+            return await _context.UserEntity.OrderBy(user => user.Login).Select(user => new UserEntity
             {
                 Login = user.Login,
                 Status = user.Status
@@ -37,7 +37,7 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
 
         public async Task<List<UserEntity>> GetAllUsersByStatusAsync(UserStatus userStatus)
         {
-            return await _context.UserEntity.Where(user => user.Status == userStatus).Select(user => new UserEntity
+            return await _context.UserEntity.Where(user => user.Status == userStatus).OrderBy(user => user.Login).Select(user => new UserEntity
             {
                 Login = user.Login,
                 Status = user.Status
@@ -46,7 +46,6 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
 
         public async Task<UserEntity> GetUserByLoginAsync(string login)
         {
-            //return await _context.UserEntity.Where(user => user.Login == login).FirstAsync();
             return await _context.UserEntity.FirstOrDefaultAsync(user => user.Login == login);
         }
 
