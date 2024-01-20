@@ -62,9 +62,27 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             }
         }
 
-        public async Task<CollaboratorEntity> DeleteCollaborator(int id)
+        public async Task<CollaboratorEntity> DeleteCollaborator(string name)
         {
-            throw new NotImplementedException();
+            var collaborator = await _repositoryUoW.CollaboratorRepository.GetCollaboratorNameAsync(name);
+
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                var result = await _repositoryUoW.CollaboratorRepository.DeleteCollaboratorAsync(name);
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
         }
 
         private async Task CheckValidParametersCollaboratorAsync(CollaboratorDto collaboratorDto)

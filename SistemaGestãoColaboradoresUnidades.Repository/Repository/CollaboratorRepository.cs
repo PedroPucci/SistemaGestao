@@ -1,4 +1,5 @@
-﻿using SistemaGestãoColaboradoresUnidades.Domain.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using SistemaGestãoColaboradoresUnidades.Domain.Entity;
 using SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces;
 
 namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
@@ -28,14 +29,22 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             return result.Entity;
         }
 
-        public async Task<CollaboratorEntity> DeleteCollaboratorAsync(int id)
+        public async Task<CollaboratorEntity> DeleteCollaboratorAsync(string name)
         {
-            throw new NotImplementedException();
+            var collaboratorToDelete = await _context.CollaboratorEntity.FirstOrDefaultAsync(collaborator => collaborator.Name == name);
+
+            if (collaboratorToDelete != null)
+            {
+                _context.CollaboratorEntity.Remove(collaboratorToDelete);
+                await _context.SaveChangesAsync();
+            }
+
+            return collaboratorToDelete;
         }
 
-        public async Task<CollaboratorEntity> GetCollaboratorByIdAsync(int id)
+        public async Task<CollaboratorEntity> GetCollaboratorNameAsync(string? name)
         {
-            throw new NotImplementedException();
+            return await _context.CollaboratorEntity.Where(collaborator => collaborator.Name == name).FirstAsync();
         }
     }
 }

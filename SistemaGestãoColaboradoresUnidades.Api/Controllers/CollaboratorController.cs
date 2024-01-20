@@ -85,11 +85,11 @@ namespace SistemaGestãoColaboradoresUnidades.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> DeleteCollaborator(int id)
+        public async Task<IActionResult> DeleteCollaborator(string name)
         {
             try
             {
-                CollaboratorEntity collaboratorEntity = await _serviceUoW.CollaboratorService.DeleteCollaborator(id);
+                CollaboratorEntity collaboratorEntity = await _serviceUoW.CollaboratorService.DeleteCollaborator(name);
                 return Ok(new
                 {
                     mensagem = $"Collaborator deleted completed successfully."
