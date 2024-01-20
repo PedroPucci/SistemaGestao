@@ -29,6 +29,9 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
+                await EnsureUnityExistsAsync(collaboratorDto);
+                await EnsureUserExistsAsync(collaboratorDto);
+
                 int id = collaboratorDto.Id;
                 CollaboratorEntity collaboratorByName = await _repositoryUoW.CollaboratorRepository.GetCollaboratorByIdAsync(id);
 
