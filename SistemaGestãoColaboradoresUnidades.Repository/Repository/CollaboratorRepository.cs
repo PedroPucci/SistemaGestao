@@ -21,5 +21,21 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
         {
             throw new NotImplementedException();
         }
+
+        public async Task<CollaboratorEntity> AddCollaboratorAsync(CollaboratorEntity collaboratorEntity)
+        {
+            var result = await _context.CollaboratorEntity.AddAsync(collaboratorEntity);
+            return result.Entity;
+        }
+
+        public async Task<CollaboratorEntity> DeleteCollaboratorAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<CollaboratorEntity> GetCollaboratorByIdAsync(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

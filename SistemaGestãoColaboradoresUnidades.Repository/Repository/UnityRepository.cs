@@ -35,10 +35,23 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             return await _context.UnityEntity.Where(unity => unity.Code == unityEntity.Code).FirstAsync();
         }
 
+        public async Task<UnityEntity> GetByIdAsync(int unityId)
+        {
+            return await _context.UnityEntity.FindAsync(unityId);
+        }
+
         public async Task<int?> GetCodeAsync(int? code)
         {
             return await _context.UnityEntity
                 .Where(unity => unity.Code == code)
+                .Select(unity => (int?)unity.Code)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<int?> GetCodeAndIdAsync(int? id)
+        {
+            return await _context.UnityEntity
+                .Where(unity => unity.Id == id)
                 .Select(unity => (int?)unity.Code)
                 .FirstOrDefaultAsync();
         }
