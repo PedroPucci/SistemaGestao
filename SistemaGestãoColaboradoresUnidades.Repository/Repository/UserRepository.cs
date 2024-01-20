@@ -44,9 +44,10 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             }).ToListAsync();
         }
 
-        public async Task<UserEntity> GetUserByLoginAsync(UserEntity userEntity)
+        public async Task<UserEntity> GetUserByLoginAsync(string login)
         {
-            return await _context.UserEntity.Where(user => user.Login == userEntity.Login).FirstAsync();
+            //return await _context.UserEntity.Where(user => user.Login == login).FirstAsync();
+            return await _context.UserEntity.FirstOrDefaultAsync(user => user.Login == login);
         }
 
         public async Task<UserEntity> GetUserByIdAsync(int userId)

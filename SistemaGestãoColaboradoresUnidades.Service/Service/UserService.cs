@@ -57,11 +57,12 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
-                var userEntity = _mapper.Map<UserDto, UserEntity>(userDto);
-                var userByLogin = await _repositoryUoW.UserRepository.GetUserByLoginAsync(userEntity);
+                var userLogin = userDto.Login;
+
+                UserEntity userByLogin = await _repositoryUoW.UserRepository.GetUserByLoginAsync(userLogin);
 
                 if (userByLogin == null)
-                    throw new InvalidOperationException("User not found!");
+                    throw new InvalidOperationException("User does not found!");
 
                 userByLogin.Password = userDto.Password;
                 userByLogin.Status = userDto.Status;
