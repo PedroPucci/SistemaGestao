@@ -22,12 +22,7 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
 
         public async Task<UserEntity> AddUser(UserDto userDto)
         {
-            var userValidation = await new UserDtoValidator().ValidateAsync(userDto);
-
-            if (!userValidation.IsValid)
-            {
-                throw new InvalidOperationException("Invalid Parameters!");             
-            }
+            await CheckValidParametersUsersAsync(userDto);
 
             using var transaction = _repositoryUoW.BeginTransaction();
             try
@@ -48,6 +43,13 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             {
                 transaction.Dispose();
             }
+        }
+        private async Task CheckValidParametersUsersAsync(UserDto userDto)
+        {
+            var userValidation = await new UserDtoValidator().ValidateAsync(userDto);
+
+            if (!userValidation.IsValid)
+                throw new InvalidOperationException("Invalid Parameters!");
         }
 
         public async Task<UserEntity> UpdateUser(UserDto userDto)
