@@ -24,9 +24,36 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             throw new NotImplementedException();
         }
 
-        public Task<CollaboratorEntity> UpdateCollaborator(CollaboratorDto collaboratorDto)
+        public async Task<CollaboratorEntity> UpdateCollaborator(CollaboratorDto collaboratorDto)
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                int id = collaboratorDto.Id;
+                CollaboratorEntity collaboratorByName = await _repositoryUoW.CollaboratorRepository.GetCollaboratorByIdAsync(id);
+
+                if (collaboratorByName == null)
+                    throw new InvalidOperationException("Collaborator does not found!");
+
+                collaboratorByName.Name = collaboratorDto.Name;
+                collaboratorByName.UnityEntityId = collaboratorDto.UnityEntityId;
+                collaboratorByName.UserEntityId = collaboratorDto.UserEntityId;
+
+                var result = _repositoryUoW.CollaboratorRepository.UpdateCollaborator(collaboratorByName);
+
+                await _repositoryUoW.SaveAsync();
+                await transaction.CommitAsync();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
         }
 
         public async Task<CollaboratorEntity> AddCollaborator(CollaboratorDto collaboratorDto)
@@ -97,8 +124,16 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
         {
             var idUnity = await _repositoryUoW.UnityRepository.GetCodeAndIdAsync(collaboratorDto.UnityEntityId);
             
-            if (idUnity == null)
+            if (idUnity == null) { 
                 throw new InvalidOperationException("Unit does not exist!");
+            }
+
+            var unityInactived = await _repositoryUoW.UnityRepository.GetByIdAsync(collaboratorDto.UnityEntityId);
+
+            if (unityInactived.Inactivated)
+            {
+                throw new InvalidOperationException("This Unity is inactived!");
+            }
         }
 
         private async Task EnsureUserExistsAsync(CollaboratorDto collaboratorDto)

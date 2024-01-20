@@ -20,7 +20,8 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
 
         public CollaboratorEntity UpdateCollaborator(CollaboratorEntity collaboratorEntity)
         {
-            throw new NotImplementedException();
+            var response = _context.CollaboratorEntity.Update(collaboratorEntity);
+            return response.Entity;
         }
 
         public async Task<CollaboratorEntity> AddCollaboratorAsync(CollaboratorEntity collaboratorEntity)
@@ -44,7 +45,12 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
 
         public async Task<CollaboratorEntity> GetCollaboratorNameAsync(string? name)
         {
-            return await _context.CollaboratorEntity.Where(collaborator => collaborator.Name == name).FirstAsync();
+            return await _context.CollaboratorEntity.FirstOrDefaultAsync(collaborator => collaborator.Name == name);
+        }
+
+        public async Task<CollaboratorEntity> GetCollaboratorByIdAsync(int collaboratorId)
+        {
+            return await _context.CollaboratorEntity.FindAsync(collaboratorId);
         }
     }
 }
