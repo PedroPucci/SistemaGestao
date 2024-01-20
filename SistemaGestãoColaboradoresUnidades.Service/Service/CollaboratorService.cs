@@ -19,9 +19,24 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             _mapper = mapper;
         }
 
-        public Task<List<CollaboratorEntity>> GetAllCollaborators()
+        public async Task<List<CollaboratorEntity>> GetAllCollaborators()
         {
-            throw new NotImplementedException();
+            using var transaction = _repositoryUoW.BeginTransaction();
+            try
+            {
+                List<CollaboratorEntity> collaboratorsList = await _repositoryUoW.CollaboratorRepository.GetAllCollaborators();
+                _repositoryUoW.Commit();
+                return collaboratorsList;
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                throw new InvalidOperationException("Unexpected error " + ex + "!");
+            }
+            finally
+            {
+                transaction.Dispose();
+            }
         }
 
         public async Task<CollaboratorEntity> UpdateCollaborator(CollaboratorDto collaboratorDto)

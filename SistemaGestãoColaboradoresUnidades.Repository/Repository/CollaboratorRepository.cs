@@ -13,9 +13,14 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
             _context = context;
         }
 
-        public Task<List<CollaboratorEntity>> GetAllCollaborators()
+        public async Task<List<CollaboratorEntity>> GetAllCollaborators()
         {
-            throw new NotImplementedException();
+            return await _context.CollaboratorEntity.OrderBy(collaborator => collaborator.Id).Select(collaborator => new CollaboratorEntity
+            {                
+                Name = collaborator.Name,
+                UnityEntityId = collaborator.UnityEntityId,
+                UserEntityId = collaborator.UserEntityId,                
+            }).ToListAsync();
         }
 
         public CollaboratorEntity UpdateCollaborator(CollaboratorEntity collaboratorEntity)
