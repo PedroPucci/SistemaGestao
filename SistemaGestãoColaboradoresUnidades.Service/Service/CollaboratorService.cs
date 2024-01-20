@@ -33,14 +33,17 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
         {
             await CheckValidParametersCollaboratorAsync(collaboratorDto);
             await EnsureUnityExistsAsync(collaboratorDto);
+            await EnsureUserExistsAsync(collaboratorDto);
 
             using var transaction = _repositoryUoW.BeginTransaction();
             try
             {
                 var collaboratorEntity = _mapper.Map<CollaboratorDto, CollaboratorEntity>(collaboratorDto);
                 var unityEntity = await _repositoryUoW.UnityRepository.GetByIdAsync(collaboratorDto.UnityEntityId);
+                var userEntity = await _repositoryUoW.UserRepository.GetUserByIdAsync(collaboratorDto.UserEntityId);
                                 
                 collaboratorEntity.UnityEntity = unityEntity;
+                collaboratorEntity.UserEntity = userEntity;
 
                 var result = await _repositoryUoW.CollaboratorRepository.AddCollaboratorAsync(collaboratorEntity);
 
@@ -78,6 +81,14 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             
             if (idUnity == null)
                 throw new InvalidOperationException("Unit does not exist!");
+        }
+
+        private async Task EnsureUserExistsAsync(CollaboratorDto collaboratorDto)
+        {
+            var idUser = await _repositoryUoW.UserRepository.GetUserByIdAsync(collaboratorDto.UserEntityId);
+
+            if (idUser == null)
+                throw new InvalidOperationException("User does not exist!");
         }
     }
 }
