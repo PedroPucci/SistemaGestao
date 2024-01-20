@@ -17,22 +17,12 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
         {
             _repositoryUoW = repositoryUoW;
             _mapper = mapper;
-            _mapper = mapper;
         }
 
         public async Task<UnityEntity> AddUnity(UnityDto? unityDto)
         {
-            var unityValidation = await new UnityDtoValidator().ValidateAsync(unityDto);
-            if (!unityValidation.IsValid)
-            {
-                throw new InvalidOperationException("Invalid Parameters!");
-            }
-
-            var unityCode = await _repositoryUoW.UnityRepository.GetCodeAsync(unityDto.Code);
-            if (unityDto.Code == unityCode)
-            {
-                throw new InvalidOperationException("The code exist, try other code!");
-            }
+            await CheckValidParametersUnityAsync(unityDto);
+            await CheckCodeUnityAsync(unityDto);
 
             using var transaction = _repositoryUoW.BeginTransaction();
             try
@@ -55,6 +45,22 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             {
                 transaction.Dispose();
             }
+        }
+
+        private async Task CheckValidParametersUnityAsync(UnityDto? unityDto)
+        {
+            var unityValidation = await new UnityDtoValidator().ValidateAsync(unityDto);
+
+            if (!unityValidation.IsValid)
+                throw new InvalidOperationException("Invalid Parameters!");
+        }
+
+        private async Task CheckCodeUnityAsync(UnityDto? unityDto)
+        {
+            var unityCode = await _repositoryUoW.UnityRepository.GetCodeAsync(unityDto?.Code);
+
+            if (unityDto?.Code == unityCode)
+                throw new InvalidOperationException("The code exist, try other code!");
         }
 
         public async Task<List<UnityEntity>> GetAllUnities()
