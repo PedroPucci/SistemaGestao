@@ -10,5 +10,6 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository.Interfaces
         Task<List<UserEntity>> GetAllUsersAsync();
         Task<List<UserEntity>> GetAllUsersByStatusAsync(UserStatus userStatus);
         Task<UserEntity> GetUserByLoginAsync(UserEntity userEntity);
+        Task<UserEntity> GetUserByIdAsync(int userId);
     }
 }

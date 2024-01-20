@@ -28,17 +28,30 @@ namespace SistemaGestãoColaboradoresUnidades.Repository.Repository
 
         public async Task<List<UserEntity>> GetAllUsersAsync()
         {
-            return await _context.UserEntity.ToListAsync();
+            return await _context.UserEntity.Select(user => new UserEntity
+            {
+                Login = user.Login,
+                Status = user.Status
+            }).ToListAsync();
         }
 
         public async Task<List<UserEntity>> GetAllUsersByStatusAsync(UserStatus userStatus)
         {
-            return await _context.UserEntity.Where(user => user.Status == userStatus).ToListAsync();
+            return await _context.UserEntity.Where(user => user.Status == userStatus).Select(user => new UserEntity
+            {
+                Login = user.Login,
+                Status = user.Status
+            }).ToListAsync();
         }
 
         public async Task<UserEntity> GetUserByLoginAsync(UserEntity userEntity)
         {
             return await _context.UserEntity.Where(user => user.Login == userEntity.Login).FirstAsync();
+        }
+
+        public async Task<UserEntity> GetUserByIdAsync(int userId)
+        {
+            return await _context.UserEntity.FindAsync(userId);
         }
     }
 }

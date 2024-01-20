@@ -61,7 +61,7 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
                 var userByLogin = await _repositoryUoW.UserRepository.GetUserByLoginAsync(userEntity);
 
                 if (userByLogin == null)
-                    return null;
+                    throw new InvalidOperationException("User not found!");
 
                 userByLogin.Password = userDto.Password;
                 userByLogin.Status = userDto.Status;

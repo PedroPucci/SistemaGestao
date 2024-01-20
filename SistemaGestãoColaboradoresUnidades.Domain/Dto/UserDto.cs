@@ -1,5 +1,4 @@
 ﻿using SistemaGestãoColaboradoresUnidades.Domain.Constant;
-using System.ComponentModel.DataAnnotations;
 
 namespace SistemaGestãoColaboradoresUnidades.Domain.Dto
 {
