@@ -97,6 +97,7 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
 
                 unityCode.Inactivated = unityDto.Inactivated;
                 unityCode.Name = unityDto.Name;
+                unityCode.Inactivated = unityDto.Inactivated;
 
                 var result = _repositoryUoW.UnityRepository.UpdateUnity(unityCode);
 
