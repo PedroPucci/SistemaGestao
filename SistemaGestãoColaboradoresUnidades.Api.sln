@@ -3,25 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34408.163
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGestãoColaboradoresUnidades.Api", "SistemaGestãoColaboradoresUnidades.Api\SistemaGestãoColaboradoresUnidades.Api.csproj", "{8031C30A-871C-465F-864B-FAD6D53750C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaGestãoColaboradoresUnidades.Api", "SistemaGestãoColaboradoresUnidades.Api\SistemaGestãoColaboradoresUnidades.Api.csproj", "{8031C30A-871C-465F-864B-FAD6D53750C3}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8A8239E9-29CA-4C4D-BB22-0E928B0B61F6} = {8A8239E9-29CA-4C4D-BB22-0E928B0B61F6}
 		{BE425BCB-AC01-47E6-8E0C-4CC00427A093} = {BE425BCB-AC01-47E6-8E0C-4CC00427A093}
 		{C428F715-1E58-43F3-A1B0-39523A884576} = {C428F715-1E58-43F3-A1B0-39523A884576}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGestãoColaboradoresUnidades.Domain", "SistemaGestãoColaboradoresUnidades.Domain\SistemaGestãoColaboradoresUnidades.Domain.csproj", "{C428F715-1E58-43F3-A1B0-39523A884576}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaGestãoColaboradoresUnidades.Domain", "SistemaGestãoColaboradoresUnidades.Domain\SistemaGestãoColaboradoresUnidades.Domain.csproj", "{C428F715-1E58-43F3-A1B0-39523A884576}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGestãoColaboradoresUnidades.Repository", "SistemaGestãoColaboradoresUnidades.Repository\SistemaGestãoColaboradoresUnidades.Repository.csproj", "{BE425BCB-AC01-47E6-8E0C-4CC00427A093}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaGestãoColaboradoresUnidades.Repository", "SistemaGestãoColaboradoresUnidades.Repository\SistemaGestãoColaboradoresUnidades.Repository.csproj", "{BE425BCB-AC01-47E6-8E0C-4CC00427A093}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C428F715-1E58-43F3-A1B0-39523A884576} = {C428F715-1E58-43F3-A1B0-39523A884576}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGestãoColaboradoresUnidades.Service", "SistemaGestãoColaboradoresUnidades.Service\SistemaGestãoColaboradoresUnidades.Service.csproj", "{8A8239E9-29CA-4C4D-BB22-0E928B0B61F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemaGestãoColaboradoresUnidades.Service", "SistemaGestãoColaboradoresUnidades.Service\SistemaGestãoColaboradoresUnidades.Service.csproj", "{8A8239E9-29CA-4C4D-BB22-0E928B0B61F6}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BE425BCB-AC01-47E6-8E0C-4CC00427A093} = {BE425BCB-AC01-47E6-8E0C-4CC00427A093}
 		{C428F715-1E58-43F3-A1B0-39523A884576} = {C428F715-1E58-43F3-A1B0-39523A884576}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemaGestaoColaboradoresUnidades.Testes", "SistemaGestaoColaboradoresUnidades.Testes\SistemaGestaoColaboradoresUnidades.Testes.csproj", "{C7298F3F-21C0-42C2-8E72-E56453E66355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{8A8239E9-29CA-4C4D-BB22-0E928B0B61F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A8239E9-29CA-4C4D-BB22-0E928B0B61F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A8239E9-29CA-4C4D-BB22-0E928B0B61F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7298F3F-21C0-42C2-8E72-E56453E66355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7298F3F-21C0-42C2-8E72-E56453E66355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7298F3F-21C0-42C2-8E72-E56453E66355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7298F3F-21C0-42C2-8E72-E56453E66355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -20,6 +20,11 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
             _mapper = mapper;
         }
 
+        public UserService(IRepositoryUoW repositoryUoW)
+        {
+            _repositoryUoW = repositoryUoW;
+        }
+
         public async Task<UserEntity> AddUser(UserDto userDto)
         {
             await CheckValidParametersUsersAsync(userDto);
@@ -44,6 +49,7 @@ namespace SistemaGestãoColaboradoresUnidades.Service.Service
                 transaction.Dispose();
             }
         }
+
         private async Task CheckValidParametersUsersAsync(UserDto userDto)
         {
             var userValidation = await new UserDtoValidator().ValidateAsync(userDto);
